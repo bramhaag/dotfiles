@@ -1,8 +1,6 @@
 #!/bin/sh
-
-# zsh history
-HISTSIZE=10000
-SAVEHIST=10000
+export WSL_WINDOWS_DRIVE=c
+export WSL_WINDOWS_USER=bramh
 
 # add user-specific executables to PATH
-export PATH=$HOME/.local/bin:$PATH
+export PATH="$(prepend_path "$PATH" "$HOME/.local/bin")"
