@@ -1,0 +1,4 @@
+#!/bin/sh
+if git rev-parse --is-inside-work-tree; then
+  git checkout "$(git branch --all | fzf | tr -d '[:space:]')"
+fi
