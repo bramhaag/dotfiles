@@ -45,6 +45,16 @@ bindkey '^[[C' autosuggest-accept  # right arrow
 bindkey '^J'   autosuggest-execute # ctrl + enter
 
 
-# Replace WSL hash
-hash -d "$WSL_WINDOWS_USER"=/mnt/${WSL_WINDOWS_DRIVE:l}/Users/$WSL_WINDOWS_USER"
-hash -d "${WSL_WINDOWS_DRIVE}=/mnt/${WSL_WINDOWS_DRIVE:l}"
+# Shorten WSL paths
+if command -v cmd.exe &> /dev/null; then 
+  win_username="$(winvar username)"
+  win_user_path="$(winvar userprofile)"
+
+  hash -d "$win_username=$(wslpath $win_user_path)"
+
+  for win_drive in ""a b c d e f g h i j k l m n o p q r s t u v w x y z""; do
+    [[ ! -r "/mnt/$win_drive" ]] || hash -d "$win_drive=/mnt/${win_drive}"
+  done
+
+  unset win_username win_user_path win_drive
+fi

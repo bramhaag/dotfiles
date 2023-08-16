@@ -25,6 +25,6 @@ unset -f prepend_path
 
 
 # Do not open WSL in system32 directory
-if [[ $PWD = /mnt/c/Windows/System32 ]]; then
+if [[ $PWD = /mnt/*/Windows/System32 ]]; then
   cd ~
 fi
